@@ -7,18 +7,20 @@ include("admindbconn.php");
        $size =count($options);
        for($i =0; $i<$size; $i++)
       { 
-    $sql = "SELECT * FROM stock WHERE itemid='$options[$i]'";
+    $sql = "SELECT t.*, p.rate FROM stock t,purchaseitem p WHERE t.itemid='$options[$i]' and p.itemid='$options[$i]' LIMIT 1";
     $sqldata = mysqli_query($dbconn, $sql) or die('error getting');
     while($row = mysqli_fetch_array($sqldata, MYSQLI_ASSOC)) 
     {
         $quantity = $row['quantity'];
         $qunit = $row['qunit'];
+        $cost=$row['rate']*$qun[$i];
+        echo "<script>alert($cost)</script>";
         if( $quantity >=$qun[$i])
         {
            
            $resultop="UPDATE stock SET quantity = quantity - '$qun[$i]' where itemid= '$options[$i]' AND quantity >= '$qun[$i]'";
            $myquery = mysqli_query($dbconn, $resultop);
-            $sql = "insert into issueitem (itemid, quantity) values('$options[$i]','$qun[$i]')";
+            $sql = "insert into issueitem (itemid, quantity,issuecost) values('$options[$i]','$qun[$i]','$cost')";
              mysqli_query($dbconn, $sql);
            
            }

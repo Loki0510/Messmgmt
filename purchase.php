@@ -47,22 +47,29 @@ include("admindbconn.php");
                echo "<script>alert('not insert stock')</script>";
            }
         }   
-        $sql = "SELECT * FROM purchaseitem WHERE itemid='$itemid'";
+        $sql = "SELECT * FROM `purchaseitem` WHERE itemid='$itemid'";
         $result = mysqli_query($dbconn, $sql);
         $res=mysqli_num_rows($result);
        
         if(mysqli_num_rows($result)>0){
+            echo "<script>alert($res)</script>";
             while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
             if(($row['seller']==$shopname) and ($row['date']==$date)){
-        $sqlinsert1 = "UPDATE purchaseitem SET quantity = quantity + '$qty' , total = total+'$total' WHERE itemid='$itemid'"; 
+        $sqlinsert1 = "UPDATE `purchaseitem` SET quantity = quantity + '$qty' , total = total+'$total' WHERE itemid='$itemid'"; 
         mysqli_query($dbconn, $sqlinsert1);
             }
             else{
-                $sqlinsert1 = "INSERT INTO purchaseitem (seller, itemid, quantity, qunit, rate, runit, date, total) VALUES('$shopname','$itemid','$qty','$qunit','$rate','$runit','$date','$total')";
+                echo "<script>alert($res)</script>";
+                $sqlinsert1 = "INSERT INTO `purchaseitem` (seller, itemid, quantity, qunit, rate, runit, date, total) VALUES('$shopname','$itemid','$qty','$qunit','$rate','$runit','$date','$total')";
                 mysqli_query($dbconn, $sqlinsert1);
                }
         }
     }
+    else{
+                echo "<script>alert($res)</script>";
+                $sqlinsert1 = "INSERT INTO `purchaseitem` (seller, itemid, quantity, qunit, rate, runit, date, total) VALUES('$shopname','$itemid','$qty','$qunit','$rate','$runit','$date','$total')";
+                mysqli_query($dbconn, $sqlinsert1);
+               }
     //  $sqlinsert = "INSERT INTO purchaseitem (seller, itemid, quantity, qunit, rate, runit, date, total) VALUES('$shopname','$itemid','$qty','$qunit','$rate','$runit','$date','$total')";
         
         

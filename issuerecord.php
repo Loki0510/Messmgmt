@@ -116,17 +116,17 @@
   </div>
    <?php 
                 include("admindbconn.php");
-                 $sqlget = "SELECT c . * , p . * ,t . * FROM issueitem c, item p, stock t WHERE c.itemid = p.id and p.id = t.itemid";
+                 $sqlget = "SELECT c . * , p . * ,t . qunit FROM issueitem c, item p, stock t WHERE c.itemid = p.id and p.id = t.itemid";
                 $sqldata = mysqli_query($dbconn, $sqlget) or die('error getting');
                 if(isset($_POST['submit']))
                    {
                  $searchitem = $_POST['searchitem'];
                  //echo $searchitem;
-                  $sqlget = "SELECT c . * , p . * ,t . qunit FROM issueitem c, item p, stock t WHERE c.itemid = p.id and p.id = t.itemid and p.itemname='$searchitem'";
+                  $sqlget = "SELECT c . * , p . * ,t . qunit FROM issueitem c, item p, stock t WHERE c.itemid = p.id and p.id = t.itemid and p.itemname like '%$searchitem%'";
                   $sqldata = mysqli_query($dbconn, $sqlget);
                      if(mysqli_num_rows($sqldata)<=0){
                          echo "<script>alert('$searchitem , Not in stock')</script>";
-                         $sqlget = "SELECT c . * , p . * ,t . * FROM issueitem c, item p, stock t WHERE c.itemid = p.id and p.id = t.itemid";
+                         $sqlget = "SELECT c . * , p . * ,t . qunit FROM issueitem c, item p, stock t WHERE c.itemid = p.id and p.id = t.itemid";
                 $sqldata = mysqli_query($dbconn, $sqlget) or die('error getting');
                      }
                     } 

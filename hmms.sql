@@ -1,12 +1,21 @@
-create database hmms;
-use hmms;
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Aug 10, 2023 at 04:35 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `hmms`
@@ -18,16 +27,15 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Table structure for table `admin`
 --
 
-CREATE TABLE IF NOT EXISTS `admin` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(60) CHARACTER SET utf8 NOT NULL,
-  `address` varchar(150) CHARACTER SET utf8 NOT NULL,
-  `email` varchar(60) CHARACTER SET utf8 NOT NULL,
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `name` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `address` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `email` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `phone` varchar(10) NOT NULL,
-  `password` varchar(30) CHARACTER SET utf8 NOT NULL,
-  `photo` varchar(200) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
+  `password` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `photo` varchar(200) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `admin`
@@ -48,17 +56,16 @@ INSERT INTO `admin` (`id`, `name`, `address`, `email`, `phone`, `password`, `pho
 -- Table structure for table `dinningstatus`
 --
 
-CREATE TABLE IF NOT EXISTS `dinningstatus` (
-  `id` int(100) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `dinningstatus` (
+  `id` int(100) NOT NULL,
   `studentid` varchar(10) NOT NULL,
   `current_status` varchar(100) NOT NULL,
   `updated_on` date NOT NULL,
   `month` varchar(100) NOT NULL,
   `no_of_days_present` int(100) NOT NULL,
   `no_of_days_absent` int(100) NOT NULL,
-  `foodtype` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
+  `foodtype` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `dinningstatus`
@@ -84,8 +91,8 @@ INSERT INTO `dinningstatus` (`id`, `studentid`, `current_status`, `updated_on`, 
 -- Table structure for table `fees`
 --
 
-CREATE TABLE IF NOT EXISTS `fees` (
-  `id` int(100) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `fees` (
+  `id` int(100) NOT NULL,
   `enrollno` varchar(100) NOT NULL,
   `no_of_days_present` int(20) NOT NULL,
   `per_day_cost` float NOT NULL,
@@ -94,9 +101,8 @@ CREATE TABLE IF NOT EXISTS `fees` (
   `month` int(200) NOT NULL,
   `fees_paid` float NOT NULL,
   `final_fees` int(200) NOT NULL,
-  `dues` int(200) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=67 ;
+  `dues` int(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `fees`
@@ -119,48 +125,21 @@ INSERT INTO `fees` (`id`, `enrollno`, `no_of_days_present`, `per_day_cost`, `add
 -- Table structure for table `issueitem`
 --
 
-CREATE TABLE IF NOT EXISTS `issueitem` (
-  `id` int(200) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `issueitem` (
+  `id` int(200) NOT NULL,
   `itemid` int(200) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date` date NOT NULL DEFAULT current_timestamp(),
   `quantity` float NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=67 ;
+  `issuecost` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `issueitem`
 --
 
-INSERT INTO `issueitem` (`id`, `itemid`, `date`, `quantity`) VALUES
-(51, 58, '2018-04-22 10:52:53', 1),
-(50, 1, '2018-04-22 10:52:53', 10),
-(49, 6, '2018-04-22 10:52:53', 10),
-(48, 49, '2018-04-20 17:28:43', 5),
-(47, 1, '2018-04-20 17:06:09', 1),
-(46, 1, '2018-04-19 11:34:48', 50),
-(45, 5, '2018-04-19 11:34:48', 40),
-(44, 55, '2018-04-19 11:34:48', 50),
-(43, 55, '2018-04-09 07:07:52', 10),
-(42, 55, '2018-04-11 00:06:58', 10),
-(41, 18, '2018-04-11 00:06:58', 5),
-(40, 55, '2018-04-06 11:44:29', 10),
-(39, 1, '2018-04-06 11:41:59', 20),
-(38, 49, '2018-04-06 11:39:31', 50),
-(52, 17, '2018-04-22 15:17:33', 20),
-(53, 10, '2018-04-22 15:17:33', 10),
-(54, 10, '2018-04-22 15:18:01', 10),
-(55, 10, '2018-04-22 15:19:57', 10),
-(56, 18, '2018-04-23 03:53:44', 2),
-(57, 6, '2018-04-23 03:53:44', 2),
-(58, 18, '2018-04-23 03:54:23', 1),
-(59, 6, '2018-04-23 03:54:23', 1),
-(60, 2, '2018-04-23 03:54:23', 10),
-(61, 3, '2018-04-28 16:28:23', 30),
-(62, 55, '2018-05-31 17:36:54', 100),
-(63, 18, '2018-05-31 17:37:26', 1),
-(64, 18, '2018-06-04 16:21:49', 1),
-(65, 55, '2018-06-04 16:21:49', 20),
-(66, 6, '2018-06-04 18:42:04', 7);
+INSERT INTO `issueitem` (`id`, `itemid`, `date`, `quantity`, `issuecost`) VALUES
+(79, 1, '2023-08-10', 5, 75),
+(78, 1, '2023-08-10', 5, 50);
 
 -- --------------------------------------------------------
 
@@ -168,11 +147,10 @@ INSERT INTO `issueitem` (`id`, `itemid`, `date`, `quantity`) VALUES
 -- Table structure for table `item`
 --
 
-CREATE TABLE IF NOT EXISTS `item` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `itemname` varchar(200) CHARACTER SET utf8 NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=59 ;
+CREATE TABLE `item` (
+  `id` int(11) NOT NULL,
+  `itemname` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `item`
@@ -218,14 +196,13 @@ INSERT INTO `item` (`id`, `itemname`) VALUES
 -- Table structure for table `menu`
 --
 
-CREATE TABLE IF NOT EXISTS `menu` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `day` varchar(10) CHARACTER SET utf8 NOT NULL,
-  `breakfast` varchar(200) CHARACTER SET utf8 NOT NULL,
-  `lunch` varchar(200) CHARACTER SET utf8 NOT NULL,
-  `dinner` varchar(200) CHARACTER SET utf8 NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+CREATE TABLE `menu` (
+  `id` int(11) NOT NULL,
+  `day` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `breakfast` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `lunch` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `dinner` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `menu`
@@ -246,45 +223,25 @@ INSERT INTO `menu` (`id`, `day`, `breakfast`, `lunch`, `dinner`) VALUES
 -- Table structure for table `purchaseitem`
 --
 
-CREATE TABLE IF NOT EXISTS `purchaseitem` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `seller` varchar(60) CHARACTER SET utf8 NOT NULL,
-  `itemid` varchar(2000) CHARACTER SET utf8 NOT NULL,
+CREATE TABLE `purchaseitem` (
+  `id` int(11) NOT NULL,
+  `seller` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `itemid` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `quantity` float NOT NULL,
-  `qunit` varchar(10) CHARACTER SET utf8 NOT NULL,
+  `qunit` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `rate` float NOT NULL,
-  `runit` varchar(10) CHARACTER SET utf8 NOT NULL,
+  `runit` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `date` date NOT NULL,
-  `total` float NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=99 ;
+  `total` float NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `purchaseitem`
 --
 
 INSERT INTO `purchaseitem` (`id`, `seller`, `itemid`, `quantity`, `qunit`, `rate`, `runit`, `date`, `total`) VALUES
-(91, '3', '10', 30, 'kg', 15, '/kg', '2018-04-22', 450),
-(90, '2', '10', 30, 'kg', 15, '/kg', '2018-04-21', 450),
-(89, '2', '14', 30, 'kg', 15, '/kg', '2018-04-21', 450),
-(88, '2', '17', 10, 'kg', 15, '/kg', '2018-04-22', 150),
-(87, '2', '17', 10, 'kg', 15, '/kg', '2018-04-22', 150),
-(86, '2', '17', 10, 'kg', 15, '/kg', '2018-04-22', 150),
-(85, '2', '18', 10, 'kg', 40, '/kg', '2018-04-10', 400),
-(84, '2', '55', 300, 'gm', 100, '/gm', '2018-04-06', 30000),
-(82, '3', '1', 50, 'kg', 60, '/kg', '2018-04-06', 3000),
-(81, '5', '6', 100, 'pack', 67, '/pack', '2018-04-06', 6700),
-(83, '3', '49', 60, 'pack', 30, '/pack', '2018-04-06', 1800),
-(79, '1', '5', 60, 'pack', 25, '/pack', '2018-04-06', 1500),
-(78, '1', '2', 100, 'kg', 60, '/kg', '2018-04-06', 6000),
-(77, '1', '1', 100, 'kg', 60, '/kg', '2018-04-06', 6000),
-(92, '1', '18', 5, 'kg', 15, '/kg', '2018-04-12', 75),
-(93, '2', '58', 10, 'pack', 100, '/pack', '2018-04-22', 1000),
-(94, '2', '17', 30, 'kg', 15, '/kg', '2018-04-21', 450),
-(95, '3', '3', 50, 'kg', 50, '/kg', '2018-04-27', 2500),
-(96, '1', '4', 5, 'pack', 30, '/pack', '2018-05-25', 150),
-(97, '3', '11', 10, 'kg', 10, '/kg', '2018-06-04', 100),
-(98, '4', '52', 10, 'kg', 20, '/kg', '2018-11-23', 200);
+(106, '3', '1', 5, 'kg', 15, '/kg', '2023-08-10', 75),
+(105, '3', '1', 10, 'kg', 10, '/kg', '2023-08-09', 100);
 
 -- --------------------------------------------------------
 
@@ -292,13 +249,12 @@ INSERT INTO `purchaseitem` (`id`, `seller`, `itemid`, `quantity`, `qunit`, `rate
 -- Table structure for table `seller`
 --
 
-CREATE TABLE IF NOT EXISTS `seller` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `shopname` varchar(30) CHARACTER SET utf8 NOT NULL,
-  `contact` varchar(10) CHARACTER SET utf8 NOT NULL,
-  `address` varchar(60) CHARACTER SET utf8 NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+CREATE TABLE `seller` (
+  `id` int(11) NOT NULL,
+  `shopname` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `contact` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `address` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `seller`
@@ -317,34 +273,19 @@ INSERT INTO `seller` (`id`, `shopname`, `contact`, `address`) VALUES
 -- Table structure for table `stock`
 --
 
-CREATE TABLE IF NOT EXISTS `stock` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `stock` (
+  `id` int(11) NOT NULL,
   `itemid` int(11) NOT NULL,
   `quantity` float NOT NULL,
-  `qunit` varchar(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
+  `qunit` varchar(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `stock`
 --
 
 INSERT INTO `stock` (`id`, `itemid`, `quantity`, `qunit`) VALUES
-(26, 18, 5, 'kg'),
-(25, 55, 100, 'gm'),
-(24, 6, 80, 'pack'),
-(23, 49, 15, 'pack'),
-(22, 5, 20, 'pack'),
-(21, 2, 90, 'kg'),
-(20, 1, 69, 'kg'),
-(27, 17, 30, 'kg'),
-(28, 14, 30, 'kg'),
-(29, 10, 30, 'kg'),
-(30, 58, 9, 'pack'),
-(31, 3, 20, 'kg'),
-(32, 4, 5, 'pack'),
-(33, 11, 10, 'kg'),
-(34, 52, 10, 'kg');
+(40, 1, 5, 'kg');
 
 -- --------------------------------------------------------
 
@@ -352,22 +293,154 @@ INSERT INTO `stock` (`id`, `itemid`, `quantity`, `qunit`) VALUES
 -- Table structure for table `student`
 --
 
-CREATE TABLE IF NOT EXISTS `student` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `course` varchar(30) CHARACTER SET utf8 NOT NULL,
-  `enroll` varchar(6) CHARACTER SET utf8 NOT NULL,
+CREATE TABLE `student` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `course` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `enroll` varchar(6) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `room` int(3) NOT NULL,
-  `block` varchar(2) CHARACTER SET utf8 NOT NULL,
-  `email` varchar(50) CHARACTER SET utf32 NOT NULL,
-  `password` varchar(30) CHARACTER SET utf8 NOT NULL,
-  `photo` varchar(200) CHARACTER SET utf8 NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
+  `block` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `email` varchar(50) CHARACTER SET utf32 COLLATE utf32_general_ci NOT NULL,
+  `password` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `photo` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `student`
 --
 
 INSERT INTO `student` (`id`, `name`, `course`, `enroll`, `room`, `block`, `email`, `password`, `photo`) VALUES
-(1, 'Arifa Nafees', 'DPIT', 'GI7405', 110, 'A', 'nafeesarifa07@gmail.com', '1234', 'student-2-512.png')
+(1, 'Arifa Nafees', 'DPIT', 'GI7405', 110, 'A', 'nafeesarifa07@gmail.com', '1234', 'student-2-512.png');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `dinningstatus`
+--
+ALTER TABLE `dinningstatus`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fees`
+--
+ALTER TABLE `fees`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `issueitem`
+--
+ALTER TABLE `issueitem`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `item`
+--
+ALTER TABLE `item`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `menu`
+--
+ALTER TABLE `menu`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `purchaseitem`
+--
+ALTER TABLE `purchaseitem`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `seller`
+--
+ALTER TABLE `seller`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `stock`
+--
+ALTER TABLE `stock`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `student`
+--
+ALTER TABLE `student`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `dinningstatus`
+--
+ALTER TABLE `dinningstatus`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+
+--
+-- AUTO_INCREMENT for table `fees`
+--
+ALTER TABLE `fees`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+
+--
+-- AUTO_INCREMENT for table `issueitem`
+--
+ALTER TABLE `issueitem`
+  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+
+--
+-- AUTO_INCREMENT for table `item`
+--
+ALTER TABLE `item`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+
+--
+-- AUTO_INCREMENT for table `menu`
+--
+ALTER TABLE `menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `purchaseitem`
+--
+ALTER TABLE `purchaseitem`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+
+--
+-- AUTO_INCREMENT for table `seller`
+--
+ALTER TABLE `seller`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `stock`
+--
+ALTER TABLE `stock`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
+-- AUTO_INCREMENT for table `student`
+--
+ALTER TABLE `student`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
