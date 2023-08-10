@@ -70,8 +70,6 @@ include("admindbconn.php");
                 $sqlinsert1 = "INSERT INTO `purchaseitem` (seller, itemid, quantity, qunit, rate, runit, date, total) VALUES('$shopname','$itemid','$qty','$qunit','$rate','$runit','$date','$total')";
                 mysqli_query($dbconn, $sqlinsert1);
                }
-    //  $sqlinsert = "INSERT INTO purchaseitem (seller, itemid, quantity, qunit, rate, runit, date, total) VALUES('$shopname','$itemid','$qty','$qunit','$rate','$runit','$date','$total')";
-        
         
     //  if(mysqli_query($dbconn, $sqlinsert))
     // {
