@@ -137,6 +137,7 @@
                 <th>Item name </th>
                 <th>Quantity </th>
                 <th>Date </th>
+                <th>Issue Cost</th>
                 
             </tr>
                </table></center>
@@ -154,7 +155,8 @@
                 
                 <td><?php echo strtoupper($row['itemname']);?> </td>           
                 <td><?php echo $row['quantity']; echo " ";echo $row['qunit'];?> </td>
-                <td><?php echo strtoupper($row['date']);?> </td>     
+                <td><?php echo strtoupper($row['date']);?> </td>  
+                <td><?php echo $row['issuecost'];?></td>   
                
             </tr>
                 

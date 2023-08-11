@@ -1,7 +1,8 @@
 <?php 
 session_start();
-include("admindbconn.php");
-?>
+include("admindbconn.php");?>
+
+                         
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -202,48 +203,27 @@ body{
      
     </div>
      <div id="status"  style="margin-top:50px; width:400px;color:white; background-color:rgb(0,0,0,0.5);padding:10px;margin-left:35%">
-        <form>	
-         <fieldset><legend class="legend" style="color:darkorange;"><b>STUDENT PRESENT</b></legend>	
-						 <?php 
-        
-                $currentdate = date('Y-m-d');
-                $d = date_parse_from_format("Y-m-d", $currentdate);
-                $currentmonth = $d["month"];
-        
-                $select_q = "SELECT * FROM dinningstatus WHERE current_status = 'on' and foodtype = 'veg' and month='$currentmonth'";
-               $q=mysqli_query($dbconn, $select_q);
-              if ($result=mysqli_query($dbconn,$select_q))
-             {
-              // Return the number of rows in result set
-               $rowcount=mysqli_num_rows($result);
-               printf("No. of student Present having foodtype Veg: %d \n",$rowcount);
-               // Free result set
-               mysqli_free_result($result);
-            }
-         
-        ?>
+        <form action="" method="POST">	
+         <fieldset>
+            <legend class="legend" style="color:darkorange;"><b>Cost Per Head</b></legend>	
+						 <input type="date" name="date">
+                         <input type="submit" name="submit" value="submit">
+                         <?php 
+                         if(isset($_POST['submit'])){
+                            $date=$_POST['date'];
+                            $sql="select total from dining where date='$date'";
+                            $sql1="select sum(issuecost) from issueitem where date='$date'";
+                            $std=mysqli_query($dbconn, $sql);
+                            $std1=mysqli_query($dbconn, $sql1);
+                            $row= mysqli_fetch_array($std, MYSQLI_ASSOC);
+                            $row1= mysqli_fetch_array($std1, MYSQLI_ASSOC);
+                            echo "<p>".$row1['sum(issuecost)']/$row['total']."</p>";
+
+                         }
+                         ?>
+                         
+                         
        <br><br>
-						 <?php 
-             
-                $currentdate = date('Y-m-d');
-                $d = date_parse_from_format("Y-m-d", $currentdate);
-                $currentmonth = $d["month"];
-        
-                $select_q = "SELECT * FROM dinningstatus WHERE current_status = 'on' and foodtype = 'nonveg' and month='$currentmonth'";
-     
-        
-        
-        $q=mysqli_query($dbconn, $select_q);
-        if ($result=mysqli_query($dbconn,$select_q))
-            {
-            // Return the number of rows in result set
-            $rowcount=mysqli_num_rows($result);
-            printf("No. of Student Present having foodtype Non-Veg: %d \n",$rowcount);
-            // Free result set
-            mysqli_free_result($result);
-            }
-         
-        ?>
     			
     </fieldset>
          </form>

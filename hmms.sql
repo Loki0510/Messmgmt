@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 10, 2023 at 04:35 PM
+-- Generation Time: Aug 11, 2023 at 04:49 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -26,6 +26,7 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `admin`
 --
+create Database hmms;
 
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
@@ -49,6 +50,30 @@ INSERT INTO `admin` (`id`, `name`, `address`, `email`, `phone`, `password`, `pho
 (21, 'Abcd', 'xyz, AMU Aligarh', 'abcd@gmail.com', '9876543210', 'abcd', 'admin-icon.png'),
 (22, 'Muhammad Ashhab Khan', 'H no. 285 Moh Kamboh, Marehra Distt etah (U.P)', 'muhammadashhabkhan@gmail.com', '9458633784', 'arifa', ''),
 (28, 'Zainab Mansoor', 'D7, Bibi Fatima Hall, AMU', 'jgfgfggh2ghf2@gmail.com', '6546464556', '123456', 'whatsapp-status.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dining`
+--
+
+CREATE TABLE `dining` (
+  `id` int(11) NOT NULL,
+  `stdc` int(11) NOT NULL,
+  `fac` int(11) NOT NULL,
+  `workers` int(11) NOT NULL,
+  `others` int(11) NOT NULL,
+  `total` int(11) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dining`
+--
+
+INSERT INTO `dining` (`id`, `stdc`, `fac`, `workers`, `others`, `total`, `date`) VALUES
+(4, 1, 2, 3, 4, 10, '2023-08-11'),
+(5, 10, 21, 1, 31, 63, '2023-08-10');
 
 -- --------------------------------------------------------
 
@@ -138,6 +163,7 @@ CREATE TABLE `issueitem` (
 --
 
 INSERT INTO `issueitem` (`id`, `itemid`, `date`, `quantity`, `issuecost`) VALUES
+(80, 1, '2023-08-11', 5, 75),
 (79, 1, '2023-08-10', 5, 75),
 (78, 1, '2023-08-10', 5, 50);
 
@@ -285,7 +311,7 @@ CREATE TABLE `stock` (
 --
 
 INSERT INTO `stock` (`id`, `itemid`, `quantity`, `qunit`) VALUES
-(40, 1, 5, 'kg');
+(40, 1, 0, 'kg');
 
 -- --------------------------------------------------------
 
@@ -320,6 +346,12 @@ INSERT INTO `student` (`id`, `name`, `course`, `enroll`, `room`, `block`, `email
 -- Indexes for table `admin`
 --
 ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `dining`
+--
+ALTER TABLE `dining`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -387,6 +419,12 @@ ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
+-- AUTO_INCREMENT for table `dining`
+--
+ALTER TABLE `dining`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `dinningstatus`
 --
 ALTER TABLE `dinningstatus`
@@ -402,7 +440,7 @@ ALTER TABLE `fees`
 -- AUTO_INCREMENT for table `issueitem`
 --
 ALTER TABLE `issueitem`
-  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `item`
